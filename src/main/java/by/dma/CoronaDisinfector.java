@@ -1,8 +1,7 @@
 package by.dma;
 
-import by.dma.service.AngryPoliceman;
+import by.dma.factory.ObjectFactory;
 import by.dma.service.Announcer;
-import by.dma.service.ConsoleAnnouncer;
 import by.dma.service.Policeman;
 
 /**
@@ -17,8 +16,8 @@ import by.dma.service.Policeman;
  */
 public class CoronaDisinfector {
 
-    private Announcer announcer = new ConsoleAnnouncer();
-    private Policeman policeman = new AngryPoliceman();
+    private Announcer announcer = ObjectFactory.getInstance().createObject(Announcer.class);
+    private Policeman policeman = ObjectFactory.getInstance().createObject(Policeman.class);
 
     public void start(Room room) {
         announcer.announce("Starting disinfection! Go out!");
@@ -27,7 +26,9 @@ public class CoronaDisinfector {
         announcer.announce("Please return to your room!");
     }
 
-    private void disinfect(Room room){
-        System.out.printf("A prayer is read out: 'Covid-19 go out!'%n -> The prayer is read, the virus is cast into hell%n");
+    private void disinfect(Room room) {
+        System.out.println("Disinfecting the room: " + room);
+        System.out.printf(
+            "\tA prayer is read out: 'Covid-19 go out!'%n \t-> The prayer is read, the virus is cast into hell%n");
     }
 }
