@@ -1,5 +1,7 @@
 package by.dma.factory;
 
+import org.reflections.Reflections;
+
 /**
  * TODO
  *
@@ -9,4 +11,6 @@ package by.dma.factory;
 public interface Config {
 
     <T> Class<? extends T> getImplClass(Class<T> interfaceType);
+
+    Reflections getScanner();
 }

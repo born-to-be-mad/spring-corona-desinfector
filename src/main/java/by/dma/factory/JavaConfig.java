@@ -32,4 +32,9 @@ public class JavaConfig implements Config {
             return classes.iterator().next();
         });
     }
+
+    @Override
+    public Reflections getScanner() {
+        return scanner;
+    }
 }
