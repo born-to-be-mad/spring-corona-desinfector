@@ -1,5 +1,6 @@
 package by.dma.factory;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.reflections.Reflections;
@@ -13,16 +14,22 @@ import org.reflections.Reflections;
 public class JavaConfig implements Config {
     private Reflections scanner;
 
-    public JavaConfig(String packageToScan) {
+    private Map<Class, Class> implementations;
+
+    public JavaConfig(String packageToScan, Map<Class, Class> implementations) {
         scanner = new Reflections(packageToScan);
+        this.implementations = implementations;
     }
 
     @Override
     public <T> Class<? extends T> getImplClass(Class<T> interfaceType) {
-        Set<Class<? extends T>> classes = scanner.getSubTypesOf(interfaceType);
-        if (classes.size() != 1) {
-            throw new RuntimeException(interfaceType + " has 0 or more than one implementation");
-        }
-        return classes.iterator().next();
+        return implementations.computeIfAbsent(interfaceType, aClass -> {
+            Set<Class<? extends T>> classes = scanner.getSubTypesOf(interfaceType);
+            if (classes.size() != 1) {
+                throw new RuntimeException(
+                    interfaceType + " has 0 or more than one implementation, please update your config");
+            }
+            return classes.iterator().next();
+        });
     }
 }

@@ -6,9 +6,9 @@ package by.dma.service;
  * @author dzmitry.marudau
  * @since 2020.4
  */
-public class AngryPoliceman implements Policeman {
+public class PolitePoliceman implements Policeman {
     @Override
     public void makePeopleLeaveRoom() {
-        System.out.println("Bang Bang! I am ready to shoot you down if you stay here!");
+        System.out.println("Please the room, we want to resque you!");
     }
 }

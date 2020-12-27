@@ -8,5 +8,5 @@ package by.dma.service;
  */
 public interface Policeman {
 
-    void makePeopleLeveRoom();
+    void makePeopleLeaveRoom();
 }

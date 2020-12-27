@@ -1,5 +1,10 @@
 package by.dma.factory;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import by.dma.service.Policeman;
+import by.dma.service.PolitePoliceman;
 import lombok.SneakyThrows;
 
 /**
@@ -11,13 +16,15 @@ import lombok.SneakyThrows;
 public class ObjectFactory {
     public static ObjectFactory instance = new ObjectFactory();
 
-    private Config config = new JavaConfig("by.dma");
+    private Config config;
 
     public static ObjectFactory getInstance() {
         return instance;
     }
 
     private ObjectFactory() {
+        config = new JavaConfig("by.dma",
+                                new HashMap<>(Map.of(Policeman.class, PolitePoliceman.class)));
     }
 
     @SneakyThrows

@@ -21,7 +21,7 @@ public class CoronaDisinfector {
 
     public void start(Room room) {
         announcer.announce("Starting disinfection! Go out!");
-        policeman.makePeopleLeveRoom();
+        policeman.makePeopleLeaveRoom();
         disinfect(room);
         announcer.announce("Please return to your room!");
     }
