@@ -1,12 +1,16 @@
 package by.dma.factory;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.reflections.Reflections;
 
 import by.dma.ApplicationContext;
-import lombok.Setter;
 import lombok.SneakyThrows;
 
 /**
@@ -31,10 +35,29 @@ public class ObjectFactory {
 
     @SneakyThrows
     public <T> T createObject(Class<T> implClass) {
-        T newInstance = implClass.getDeclaredConstructor().newInstance();
+        T newInstance = create(implClass);
 
-        configurators.forEach(objectConfigurator -> objectConfigurator.configure(newInstance, context));
+        configure(newInstance);
+
+        invokeInit(implClass, newInstance);
 
         return newInstance;
+    }
+
+    private <T> void invokeInit(Class<T> implClass, T newInstance) throws InvocationTargetException, IllegalAccessException {
+        for (Method method : implClass.getMethods()) {
+            if (method.isAnnotationPresent(PostConstruct.class)) {
+                method.invoke(newInstance);
+            }
+        }
+    }
+
+    private <T> T create(Class<T> implClass) throws InstantiationException, IllegalAccessException,
+                                                    InvocationTargetException, NoSuchMethodException {
+        return implClass.getDeclaredConstructor().newInstance();
+    }
+
+    private <T> void configure(T newInstance) {
+        configurators.forEach(objectConfigurator -> objectConfigurator.configure(newInstance, context));
     }
 }
