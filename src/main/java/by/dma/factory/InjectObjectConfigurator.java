@@ -32,11 +32,10 @@ public class InjectObjectConfigurator implements ObjectConfigurator {
 
     @SneakyThrows
     @Override
-    public void coinfigure(Object obj) {
+    public void configure(Object obj) {
         Class<?> implClass = obj.getClass();
         for (Field field : implClass.getDeclaredFields()) {
             InjectProperty annotation = field.getAnnotation(InjectProperty.class);
-
 
             if (annotation != null) {
                 String value = annotation.value().isEmpty()

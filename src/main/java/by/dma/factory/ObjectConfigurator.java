@@ -7,5 +7,5 @@ package by.dma.factory;
  * @since 2020.4
  */
 public interface ObjectConfigurator {
-    void coinfigure(Object obj);
+    void configure(Object obj);
 }

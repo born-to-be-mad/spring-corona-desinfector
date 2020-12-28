@@ -8,12 +8,12 @@ import by.dma.annotation.InjectProperty;
  * @author dzmitry.marudau
  * @since 2020.4
  */
-public class SimpleRecommendator implements Recommendator {
-    @InjectProperty
+public class DrinkRecommendator implements Recommendator {
+    @InjectProperty("whiskey")
     private String alcohol;
 
     @Override
     public void recommend() {
-        System.out.println("ADVERTISING: to protect from covid-19, drink " + alcohol);
+        System.out.printf("ADVERTISING: to protect from covid-19, drink '%s'%n", alcohol);
     }
 }

@@ -43,7 +43,7 @@ public class ObjectFactory {
         }
         T newInstance = implClass.getDeclaredConstructor().newInstance();
 
-        configurators.forEach(objectConfigurator -> objectConfigurator.coinfigure(newInstance));
+        configurators.forEach(objectConfigurator -> objectConfigurator.configure(newInstance));
 
         return newInstance;
     }
