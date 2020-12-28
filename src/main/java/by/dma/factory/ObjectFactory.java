@@ -1,9 +1,7 @@
 package by.dma.factory;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +10,7 @@ import javax.annotation.PostConstruct;
 import org.reflections.Reflections;
 
 import by.dma.ApplicationContext;
+import by.dma.proxy.ProxyConfigurator;
 import lombok.SneakyThrows;
 
 /**
@@ -22,6 +21,7 @@ import lombok.SneakyThrows;
  */
 public class ObjectFactory {
     private final List<ObjectConfigurator> configurators = new ArrayList<>();
+    private final List<ProxyConfigurator> proxyConfigurators = new ArrayList<>();
 
     private final ApplicationContext context;
 
@@ -31,6 +31,10 @@ public class ObjectFactory {
         Reflections scanner = context.getConfig().getScanner();
         for (Class<? extends ObjectConfigurator> aClass : scanner.getSubTypesOf(ObjectConfigurator.class)) {
             configurators.add(aClass.getDeclaredConstructor().newInstance());
+        }
+
+        for (Class<? extends ProxyConfigurator> aClass : scanner.getSubTypesOf(ProxyConfigurator.class)) {
+            proxyConfigurators.add(aClass.getDeclaredConstructor().newInstance());
         }
     }
 
@@ -42,19 +46,15 @@ public class ObjectFactory {
 
         invokeInit(implClass, newInstance);
 
-        if(implClass.isAnnotationPresent(Deprecated.class)) {
-            return (T) Proxy.newProxyInstance(implClass.getClassLoader(), implClass.getInterfaces(),
-                      new InvocationHandler() {
-               @Override
-               public Object invoke(Object proxy, Method method, Object[] args)
-                   throws Throwable {
-                   System.out.println("******************* Deprecated method is called!!!!");
-                   // call real method
-                   return method.invoke(newInstance, args);
-               }
-           });
-        }
+        newInstance = wrapWithProxyIfNeeded(implClass, newInstance);
+
         return newInstance;
+    }
+
+    private <T> T wrapWithProxyIfNeeded(Class<T> implClass, T newInstance) {
+        for (ProxyConfigurator proxyConfigurator : proxyConfigurators) {
+            newInstance = (T) proxyConfigurator.replaceWithProxyIfNeeded(newInstance, implClass);
+        } return newInstance;
     }
 
     private <T> void invokeInit(Class<T> implClass, T newInstance) throws InvocationTargetException, IllegalAccessException {
