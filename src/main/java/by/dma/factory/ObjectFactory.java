@@ -1,9 +1,10 @@
 package by.dma.factory;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -41,6 +42,18 @@ public class ObjectFactory {
 
         invokeInit(implClass, newInstance);
 
+        if(implClass.isAnnotationPresent(Deprecated.class)) {
+            return (T) Proxy.newProxyInstance(implClass.getClassLoader(), implClass.getInterfaces(),
+                      new InvocationHandler() {
+               @Override
+               public Object invoke(Object proxy, Method method, Object[] args)
+                   throws Throwable {
+                   System.out.println("******************* Deprecated method is called!!!!");
+                   // call real method
+                   return method.invoke(newInstance, args);
+               }
+           });
+        }
         return newInstance;
     }
 

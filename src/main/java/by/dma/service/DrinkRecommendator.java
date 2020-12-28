@@ -10,6 +10,7 @@ import by.dma.annotation.Singleton;
  * @since 2020.4
  */
 @Singleton
+@Deprecated
 public class DrinkRecommendator implements Recommendator {
     @InjectProperty("whiskey")
     private String alcohol;
