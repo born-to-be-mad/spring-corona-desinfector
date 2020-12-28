@@ -10,7 +10,7 @@ import by.dma.service.PolitePoliceman;
 import lombok.SneakyThrows;
 
 /**
- * Universal
+ * Singleton, it runs slowly first time cause it scans all packages and prepares configurators.
  *
  * @author dzmitry.marudau
  * @since 2020.4

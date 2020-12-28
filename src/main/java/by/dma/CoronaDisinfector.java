@@ -29,7 +29,8 @@ public class CoronaDisinfector {
 
     private void disinfect(Room room) {
         System.out.println("Disinfecting the room: " + room);
-        System.out.printf(
-            "\tA prayer is read out: 'Covid-19 go out!'%n \t-> The prayer is read, the virus is cast into hell%n");
+        System.out.printf("\tA prayer is read out: 'Covid-19 go out!'%n " +
+                          "\t-> The prayer is read, the virus is cast into hell%n");
+
     }
 }
