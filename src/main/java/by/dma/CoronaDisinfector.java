@@ -14,6 +14,7 @@ import by.dma.service.Policeman;
  * @author dzmitry.marudau
  * @since 2020.4
  */
+@Deprecated
 public class CoronaDisinfector {
 
     // This is an example of LOOKUP
