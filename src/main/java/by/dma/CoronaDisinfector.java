@@ -16,8 +16,9 @@ import by.dma.service.Policeman;
  */
 public class CoronaDisinfector {
 
-    private Announcer announcer = ObjectFactory.getInstance().createObject(Announcer.class);
-    private Policeman policeman = ObjectFactory.getInstance().createObject(Policeman.class);
+    // This is an example of LOOKUP
+    private final Announcer announcer = ObjectFactory.getInstance().createObject(Announcer.class);
+    private final Policeman policeman = ObjectFactory.getInstance().createObject(Policeman.class);
 
     public void start(Room room) {
         announcer.announce("Starting disinfection! Go out!");
