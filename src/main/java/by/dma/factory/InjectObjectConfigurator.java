@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import by.dma.ApplicationContext;
 import by.dma.annotation.InjectProperty;
 import lombok.SneakyThrows;
 
@@ -32,7 +33,7 @@ public class InjectObjectConfigurator implements ObjectConfigurator {
 
     @SneakyThrows
     @Override
-    public void configure(Object obj) {
+    public void configure(Object obj, ApplicationContext context) {
         Class<?> implClass = obj.getClass();
         for (Field field : implClass.getDeclaredFields()) {
             InjectProperty annotation = field.getAnnotation(InjectProperty.class);

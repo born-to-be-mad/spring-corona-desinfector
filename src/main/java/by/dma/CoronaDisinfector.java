@@ -1,6 +1,6 @@
 package by.dma;
 
-import by.dma.factory.ObjectFactory;
+import by.dma.annotation.InjectByType;
 import by.dma.service.Announcer;
 import by.dma.service.Policeman;
 
@@ -17,8 +17,16 @@ import by.dma.service.Policeman;
 public class CoronaDisinfector {
 
     // This is an example of LOOKUP
+/*
     private final Announcer announcer = ObjectFactory.getInstance().createObject(Announcer.class);
     private final Policeman policeman = ObjectFactory.getInstance().createObject(Policeman.class);
+*/
+
+    // IoC: don't call us, we call you!
+    @InjectByType
+    private Announcer announcer;
+    @InjectByType
+    private Policeman policeman;
 
     public void start(Room room) {
         announcer.announce("Starting disinfection! Go out!");
