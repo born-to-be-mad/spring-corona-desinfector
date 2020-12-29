@@ -1,7 +1,7 @@
 package by.dma.service;
 
 /**
- * TODO
+ * Recommendator service.
  *
  * @author dzmitry.marudau
  * @since 2020.4

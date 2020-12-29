@@ -4,7 +4,7 @@ import by.dma.annotation.InjectProperty;
 import by.dma.annotation.Singleton;
 
 /**
- * TODO
+ * Drink implementation of {@code Recommendator}.
  *
  * @author dzmitry.marudau
  * @since 2020.4

@@ -13,7 +13,7 @@ import lombok.SneakyThrows;
 import static java.util.stream.Collectors.toMap;
 
 /**
- * TODO
+ * InjectObject implementation of {@code ObjectConfigurator}.
  *
  * @author dzmitry.marudau
  * @since 2020.4
@@ -22,7 +22,7 @@ public class InjectObjectConfigurator implements ObjectConfigurator {
 
     public static final String PROPERTY_FILE = "application.properties";
 
-    private Map<String, String> propertiesMap;
+    private final Map<String, String> propertiesMap;
 
     @SneakyThrows
     public InjectObjectConfigurator() {

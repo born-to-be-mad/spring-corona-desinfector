@@ -6,15 +6,15 @@ import java.util.Set;
 import org.reflections.Reflections;
 
 /**
- * TODO
+ * Java config implementation.
  *
  * @author dzmitry.marudau
  * @since 2020.4
  */
 public class JavaConfig implements Config {
-    private Reflections scanner;
+    private final Reflections scanner;
 
-    private Map<Class, Class> implementations;
+    private final Map<Class, Class> implementations;
 
     public JavaConfig(String packageToScan, Map<Class, Class> implementations) {
         scanner = new Reflections(packageToScan);

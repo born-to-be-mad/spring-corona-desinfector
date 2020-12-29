@@ -1,7 +1,7 @@
 package by.dma.service;
 
 /**
- * TODO
+ * Polite Policeman implementation.
  *
  * @author dzmitry.marudau
  * @since 2020.4

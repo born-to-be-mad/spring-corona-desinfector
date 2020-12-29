@@ -3,7 +3,7 @@ package by.dma;
 import java.util.Random;
 
 /**
- * TODO
+ * Simple room entity.
  *
  * @author dzmitry.marudau
  * @since 2020.4

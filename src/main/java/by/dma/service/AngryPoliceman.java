@@ -5,7 +5,7 @@ import javax.annotation.PostConstruct;
 import by.dma.annotation.InjectByType;
 
 /**
- * TODO
+ * Angry Policeman implementation.
  *
  * @author dzmitry.marudau
  * @since 2020.4

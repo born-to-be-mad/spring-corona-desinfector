@@ -4,7 +4,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * TODO
+ * Custom annotation for injecting by type.
  *
  * @author dzmitry.marudau
  * @since 2020.4

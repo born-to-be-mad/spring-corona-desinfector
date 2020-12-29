@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * TODO
+ * Application Context.
  *
  * @author dzmitry.marudau
  * @since 2020.4
@@ -19,7 +19,7 @@ public class ApplicationContext {
     @Setter
     private ObjectFactory factory;
 
-    private Map<Class, Object> cache = new ConcurrentHashMap<>();
+    private final Map<Class, Object> cache = new ConcurrentHashMap<>();
 
     @Getter
     private final Config config;
@@ -39,9 +39,20 @@ public class ApplicationContext {
         }
 
         T newObject = factory.createObject(implClass);
+
         if (implClass.isAnnotationPresent(Singleton.class)) {
-            cache.put(type, newObject);
+            cache(type, newObject);
         }
         return newObject;
+    }
+
+    public void cache(Class type, Object newObject) {
+        if (type.isInterface()) {
+            cache.put(type, newObject);
+        } else {
+            for (Class classInterface : type.getInterfaces()) {
+                cache.put(classInterface, newObject);
+            }
+        }
     }
 }

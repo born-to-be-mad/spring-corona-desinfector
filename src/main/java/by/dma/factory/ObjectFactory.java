@@ -54,7 +54,8 @@ public class ObjectFactory {
     private <T> T wrapWithProxyIfNeeded(Class<T> implClass, T newInstance) {
         for (ProxyConfigurator proxyConfigurator : proxyConfigurators) {
             newInstance = (T) proxyConfigurator.replaceWithProxyIfNeeded(newInstance, implClass);
-        } return newInstance;
+        }
+        return newInstance;
     }
 
     private <T> void invokeInit(Class<T> implClass, T newInstance) throws InvocationTargetException, IllegalAccessException {

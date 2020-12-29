@@ -3,7 +3,7 @@ package by.dma.factory;
 import org.reflections.Reflections;
 
 /**
- * TODO
+ * Config interface
  *
  * @author dzmitry.marudau
  * @since 2020.4

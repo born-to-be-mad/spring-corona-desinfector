@@ -1,7 +1,6 @@
 package by.dma.proxy;
 
 /**
- * TODO
  *
  * @author dzmitry.marudau
  * @since 2020.4

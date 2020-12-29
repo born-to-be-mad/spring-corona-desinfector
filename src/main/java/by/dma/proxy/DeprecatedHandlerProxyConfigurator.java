@@ -8,7 +8,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.InvocationHandler;
 
 /**
- * TODO
+ * DeprecatedHandlerProxy implementation of {@code ProxyConfigurator}.
  *
  * @author dzmitry.marudau
  * @since 2020.4
@@ -16,7 +16,7 @@ import net.sf.cglib.proxy.InvocationHandler;
 public class DeprecatedHandlerProxyConfigurator implements ProxyConfigurator {
     @Override
     public Object replaceWithProxyIfNeeded(Object type, Class implClass) {
-        if(implClass.isAnnotationPresent(Deprecated.class)) {
+        if (implClass.isAnnotationPresent(Deprecated.class)) {
             if (implClass.getInterfaces().length == 0) {
                 return Enhancer.create(implClass,
                                        (InvocationHandler) (proxy, method, args) -> getInvocationHandlerLogic(type, method, args));
